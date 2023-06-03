@@ -6,6 +6,7 @@ COPY . /github.com/ImOsMa/bybit_service/
 WORKDIR /github.com/ImOsMa/bybit_service/
 
 RUN go mod download
+RUN go mod tidy
 RUN GOOS=linux go build -o ./bin/service ./cmd/main.go
 
 FROM alpine:latest

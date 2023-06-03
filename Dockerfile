@@ -9,6 +9,6 @@ COPY ./ ./
 
 # build go app
 RUN go mod download
-RUN go build -o bybit_trading ./cmd/main.go
+RUN go build -o bybit_service ./cmd/main.go
 
-CMD ["./bybit_trading"]
+CMD ["./bybit_service"]

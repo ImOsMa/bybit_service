@@ -1,14 +1,18 @@
 FROM golang:alpine
 
-ENV GIN_MODE=release
-
 RUN go version
-ENV GOPATH=/
 
-COPY ./ ./
+COPY . /github.com/ImOsMa/bybit_service/
+WORKDIR /github.com/ImOsMa/bybit_service/
 
-# build go app
 RUN go mod download
-RUN go build -o bybit_service ./cmd/main.go
+RUN GOOS=linux go build -o ./.bin/service ./cmd/main.go
 
-CMD ["./bybit_service"]
+FROM alpine:latest
+
+WORKDIR /root/
+
+COPY --from=0 /github.com/ImOsMa/bybit_service/.bin/service .
+COPY --from=0 /github.com/ImOsMa/bybit_service/configs configs/
+
+CMD ["./service"]

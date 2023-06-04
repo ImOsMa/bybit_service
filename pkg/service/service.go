@@ -18,7 +18,7 @@ type Market interface {
 	InstrumentInfo(user bybit_service.User, symbol bybit.SymbolV5) (bybit_service.GetInstrumentInfo, error)
 	Tickers(user bybit_service.User, symbol bybit.SymbolV5) (bybit_service.TickersSportResult, error)
 	PositionInfo(user bybit_service.User, symbol bybit.SymbolV5) (bybit_service.PositionInfo, error)
-	CoinInfo(user bybit_service.User, coin string)
+	CoinInfo(user bybit_service.User, symbol bybit.SymbolV5) (bybit_service.CoinInfo, error)
 }
 
 type Order interface {

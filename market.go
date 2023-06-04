@@ -76,3 +76,9 @@ type PositionInfo struct {
 	StopLoss       string `json:"stop_loss"`
 	TradeMode      int    `json:"trade_mode"`
 }
+
+type CoinInfo struct {
+	Symbol string `json:"symbol"`
+	Bid    string `json:"bid"`
+	Ask    string `json:"ask"`
+}

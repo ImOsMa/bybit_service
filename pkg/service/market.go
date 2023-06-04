@@ -171,4 +171,24 @@ func (m *MarketService) PositionInfo(user bybit_service.User, symbol bybit.Symbo
 	}, nil
 }
 
-func (m *MarketService) CoinInfo(user bybit_service.User, coin string) {}
+func (m *MarketService) CoinInfo(user bybit_service.User, symbol bybit.SymbolV5) (bybit_service.CoinInfo, error) {
+	client := bybit.NewTestClient().WithAuth(user.AccountId, user.Token)
+	orderBook, err := client.V5().Market().GetOrderbook(bybit.V5GetOrderbookParam{
+		Category: bybit.CategoryV5Spot,
+		Symbol:   symbol,
+	})
+
+	if err != nil {
+		return bybit_service.CoinInfo{}, err
+	}
+
+	if orderBook.RetMsg != "OK" && orderBook.RetMsg != "" {
+		return bybit_service.CoinInfo{}, fmt.Errorf("error in getting instrument info")
+	}
+
+	return bybit_service.CoinInfo{
+		Symbol: string(orderBook.Result.Symbol),
+		Bid:    orderBook.Result.Bids[0].Price,
+		Ask:    orderBook.Result.Asks[0].Price,
+	}, nil
+}

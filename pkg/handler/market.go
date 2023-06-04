@@ -127,7 +127,37 @@ func (h *Handler) tickers(c *gin.Context) {
 	c.JSON(http.StatusOK, tickers)
 }
 
-func (h *Handler) coinInfo(c *gin.Context) {}
+func (h *Handler) coinInfo(c *gin.Context) {
+	accountID, err := getAccountId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	tokenID, err := getToken(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	var (
+		serviceSymbol bybit.SymbolV5
+	)
+
+	serviceSymbol = bybit.SymbolV5(c.Query("symbol"))
+	if serviceSymbol == "" {
+		newErrorResponse(c, http.StatusBadRequest, "invalid symbol")
+		return
+	}
+
+	orderBook, err := h.services.CoinInfo(bybit_service.User{AccountId: accountID, Token: tokenID}, serviceSymbol)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, orderBook)
+}
 
 func (h *Handler) positionInfo(c *gin.Context) {
 	accountID, err := getAccountId(c)

@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	accountId = "AccountId"
-	token     = "Access-Token"
+	accountId = "account_id"
+	token     = "token"
 )
 
 func getAccountId(c *gin.Context) (string, error) {

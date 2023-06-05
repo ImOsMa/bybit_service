@@ -66,21 +66,21 @@ type SpotOpenOrdersResult struct {
 	AccountID           string `json:"account_id"`
 	ExchangeID          string `json:"exchange_id"`
 	Symbol              string `json:"symbol"`
-	SymbolName          string `json:"symbolName"`
-	OrderID             string `json:"orderId"`
+	SymbolName          string `json:"symbol_name"`
+	OrderID             string `json:"order_id"`
 	Price               string `json:"price"`
-	OrigQty             string `json:"origQty"`
-	ExecutedQty         string `json:"executedQty"`
-	CummulativeQuoteQty string `json:"cummulativeQuoteQty"`
-	AvgPrice            string `json:"avgPrice"`
+	OrigQty             string `json:"orig_qty"`
+	ExecutedQty         string `json:"executed_qty"`
+	CummulativeQuoteQty string `json:"cummulative_quote_qty"`
+	AvgPrice            string `json:"avg_price"`
 	Status              string `json:"status"`
-	TimeInForce         string `json:"timeInForce"`
+	TimeInForce         string `json:"time_in_force"`
 	Type                string `json:"type"`
 	Side                string `json:"side"`
-	StopPrice           string `json:"stopPrice"`
-	IcebergQty          string `json:"icebergQty"`
+	StopPrice           string `json:"stop_price"`
+	IcebergQty          string `json:"iceberg_qty"`
 	Time                string `json:"time"`
-	UpdateTime          string `json:"updateTime"`
+	UpdateTime          string `json:"update_time"`
 	IsWorking           bool   `json:"isWorking"`
 }
 
